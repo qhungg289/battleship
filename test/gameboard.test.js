@@ -1,65 +1,79 @@
 import Gameboard from "../src/gameboard";
 
-const newBoard = Gameboard();
+const testBoard = Gameboard();
 
 describe("size of board is 10x10", () => {
 	test("board height is 10", () => {
-		expect(newBoard.board.length).toBe(10);
+		expect(testBoard.board.length).toBe(10);
 	});
 
 	test("board width is 10", () => {
-		expect(newBoard.board[0].length).toBe(10);
+		expect(testBoard.board[0].length).toBe(10);
 	});
 });
 
 describe("is it able to place ships at specific coordinates", () => {
-	newBoard.placeShip(6, 5, 4, "vertical");
-	newBoard.placeShip(2, 3, 3, "horizontal");
-
+	testBoard.placeShip(2, 3, 3, "horizontal");
 	test("cordinates of horizontal placed ship", () => {
-		expect(newBoard.board[3][2]).not.toBeNull();
-		expect(newBoard.board[3][3]).not.toBeNull();
-		expect(newBoard.board[3][4]).not.toBeNull();
-		expect(newBoard.board[3][2]).toBeFalsy();
-		expect(newBoard.board[3][3]).toBeFalsy();
-		expect(newBoard.board[3][4]).toBeFalsy();
+		expect(testBoard.board[3][2]).not.toBeNull();
+		expect(testBoard.board[3][3]).not.toBeNull();
+		expect(testBoard.board[3][4]).not.toBeNull();
 	});
 
-	test("cordinates of horizontal placed ship", () => {
-		expect(newBoard.board[5][6]).not.toBeNull();
-		expect(newBoard.board[6][6]).not.toBeNull();
-		expect(newBoard.board[7][6]).not.toBeNull();
-		expect(newBoard.board[8][6]).not.toBeNull();
-		expect(newBoard.board[5][6]).toBeFalsy();
-		expect(newBoard.board[6][6]).toBeFalsy();
-		expect(newBoard.board[7][6]).toBeFalsy();
-		expect(newBoard.board[8][6]).toBeFalsy();
+	testBoard.placeShip(6, 5, 4, "vertical");
+	test("cordinates of vertical placed ship", () => {
+		expect(testBoard.board[5][6]).not.toBeNull();
+		expect(testBoard.board[6][6]).not.toBeNull();
+		expect(testBoard.board[7][6]).not.toBeNull();
+		expect(testBoard.board[8][6]).not.toBeNull();
 	});
 
-	newBoard.placeShip(8, 0, 4, "horizontal");
-	newBoard.placeShip(8, 2, 2, "horizontal");
-
+	testBoard.placeShip(8, 0, 4, "horizontal");
 	test("prevent board overflow horizontal", () => {
-		expect(newBoard.board[0][8]).toBeNull();
-		expect(newBoard.board[0][9]).toBeNull();
+		expect(testBoard.board[0][8]).toBeNull();
+		expect(testBoard.board[0][9]).toBeNull();
 	});
 
+	testBoard.placeShip(4, 5, 3, "horizontal");
+	test("prevent ship overlap horizontal", () => {
+		expect(testBoard.board[5][4]).toBeNull();
+		expect(testBoard.board[5][5]).toBeNull();
+		expect(testBoard.board[5][6]).not.toBeNull();
+	});
+
+	testBoard.placeShip(8, 2, 2, "horizontal");
 	test("allow to place ship right at the edge horizontal", () => {
-		expect(newBoard.board[2][8]).not.toBeNull();
-		expect(newBoard.board[2][9]).not.toBeNull();
+		expect(testBoard.board[2][8]).not.toBeNull();
+		expect(testBoard.board[2][9]).not.toBeNull();
 	});
 
-	newBoard.placeShip(9, 7, 4, "vertical");
-	newBoard.placeShip(8, 8, 2, "vertical");
-
+	testBoard.placeShip(9, 7, 4, "vertical");
 	test("prevent board overflow vertical", () => {
-		expect(newBoard.board[7][9]).toBeNull();
-		expect(newBoard.board[8][9]).toBeNull();
-		expect(newBoard.board[9][9]).toBeNull();
+		expect(testBoard.board[7][9]).toBeNull();
+		expect(testBoard.board[8][9]).toBeNull();
+		expect(testBoard.board[9][9]).toBeNull();
 	});
 
+	testBoard.placeShip(2, 1, 4, "vertical");
+	test("prevent ship overlap vertical", () => {
+		expect(testBoard.board[1][2]).toBeNull();
+		expect(testBoard.board[2][2]).toBeNull();
+		expect(testBoard.board[3][2]).not.toBeNull();
+		expect(testBoard.board[4][2]).toBeNull();
+	});
+
+	testBoard.placeShip(8, 8, 2, "vertical");
 	test("allow to place ship right at the edge vertical", () => {
-		expect(newBoard.board[8][8]).not.toBeNull();
-		expect(newBoard.board[9][8]).not.toBeNull();
+		expect(testBoard.board[8][8]).not.toBeNull();
+		expect(testBoard.board[9][8]).not.toBeNull();
+	});
+
+	testBoard.receiveAttack(5, 1);
+	testBoard.receiveAttack(1, 8);
+	test("records the cordinates of the missed shot", () => {
+		expect(testBoard.missedShot).toEqual([
+			{ x: 5, y: 1 },
+			{ x: 1, y: 8 },
+		]);
 	});
 });
