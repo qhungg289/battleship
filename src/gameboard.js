@@ -18,16 +18,14 @@ function Gameboard() {
 		}
 	}
 
-	/* Each parts of a ship need to have an index so it can
-	determine which part has been hit to respond correctly */
 	function placeShip(x, y, shipLength, orientation) {
-		const newShip = Ship(shipLength);
+		const ship = Ship(shipLength);
 		if (orientation == "horizontal" && x + shipLength <= 10) {
 			for (let i = 0; i < shipLength; i++) {
 				if (board[y][x + i] != null) return;
 			}
 			for (let i = 0; i < shipLength; i++) {
-				board[y][x] = newShip.shipParts[i]; // Change this
+				board[y][x] = { ship: ship, partIndex: i };
 				x++;
 			}
 		} else if (orientation == "vertical" && y + shipLength <= 10) {
@@ -35,7 +33,7 @@ function Gameboard() {
 				if (board[y + i][x] != null) return;
 			}
 			for (let i = 0; i < shipLength; i++) {
-				board[y][x] = newShip.shipParts[i]; // And this
+				board[y][x] = { ship: ship, partIndex: i };
 				y++;
 			}
 		}
@@ -44,6 +42,8 @@ function Gameboard() {
 	function receiveAttack(x, y) {
 		if (board[y][x] == null) {
 			missedShot.push({ x: x, y: y });
+		} else {
+			board[y][x].ship.hit(board[y][x].partIndex); // Write test for this
 		}
 	}
 
