@@ -12,20 +12,58 @@ describe("size of board is 10x10", () => {
 	});
 });
 
-describe("is it able to place ships at specific coordinates", () => {
+describe("check ship position at specific coordinates", () => {
 	testBoard.placeShip(2, 3, 3, "horizontal");
 	test("cordinates of horizontal placed ship", () => {
 		expect(testBoard.board[3][2]).not.toBeNull();
 		expect(testBoard.board[3][3]).not.toBeNull();
 		expect(testBoard.board[3][4]).not.toBeNull();
+
+		expect(testBoard.board[3][2].partIndex).toEqual(0);
+		expect(testBoard.board[3][3].partIndex).toEqual(1);
+		expect(testBoard.board[3][4].partIndex).toEqual(2);
+
+		expect(testBoard.board[3][2].ship.shipParts).toEqual([false, false, false]);
+		expect(testBoard.board[3][3].ship.shipParts).toEqual([false, false, false]);
+		expect(testBoard.board[3][4].ship.shipParts).toEqual([false, false, false]);
 	});
 
 	testBoard.placeShip(6, 5, 4, "vertical");
-	test("cordinates of vertical placed ship", () => {
+	test.skip("cordinates of vertical placed ship", () => {
 		expect(testBoard.board[5][6]).not.toBeNull();
 		expect(testBoard.board[6][6]).not.toBeNull();
 		expect(testBoard.board[7][6]).not.toBeNull();
 		expect(testBoard.board[8][6]).not.toBeNull();
+
+		expect(testBoard.board[5][6].partIndex).toEqual(0);
+		expect(testBoard.board[6][6].partIndex).toEqual(1);
+		expect(testBoard.board[7][6].partIndex).toEqual(2);
+		expect(testBoard.board[8][6].partIndex).toEqual(3);
+
+		expect(testBoard.board[5][6].ship.shipParts).toEqual([
+			false,
+			false,
+			false,
+			false,
+		]);
+		expect(testBoard.board[6][6].ship.shipParts).toEqual([
+			false,
+			false,
+			false,
+			false,
+		]);
+		expect(testBoard.board[7][6].ship.shipParts).toEqual([
+			false,
+			false,
+			false,
+			false,
+		]);
+		expect(testBoard.board[8][6].ship.shipParts).toEqual([
+			false,
+			false,
+			false,
+			false,
+		]);
 	});
 
 	testBoard.placeShip(8, 0, 4, "horizontal");
@@ -74,6 +112,34 @@ describe("is it able to place ships at specific coordinates", () => {
 		expect(testBoard.missedShot).toEqual([
 			{ x: 5, y: 1 },
 			{ x: 1, y: 8 },
+		]);
+	});
+
+	testBoard.receiveAttack(6, 7);
+	test("hit the correct ship", () => {
+		expect(testBoard.board[5][6].ship.shipParts).toEqual([
+			false,
+			false,
+			true,
+			false,
+		]);
+		expect(testBoard.board[6][6].ship.shipParts).toEqual([
+			false,
+			false,
+			true,
+			false,
+		]);
+		expect(testBoard.board[7][6].ship.shipParts).toEqual([
+			false,
+			false,
+			true,
+			false,
+		]);
+		expect(testBoard.board[8][6].ship.shipParts).toEqual([
+			false,
+			false,
+			true,
+			false,
 		]);
 	});
 });
