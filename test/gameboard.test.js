@@ -12,7 +12,7 @@ describe("size of board is 10x10", () => {
 	});
 });
 
-describe("check ship position at specific coordinates", () => {
+describe("check ship at specific coordinates", () => {
 	testBoard.placeShip(2, 3, 3, "horizontal");
 	test("cordinates of horizontal placed ship", () => {
 		expect(testBoard.board[3][2]).not.toBeNull();
@@ -141,5 +141,13 @@ describe("check ship position at specific coordinates", () => {
 			true,
 			false,
 		]);
+	});
+
+	test("is all ships sunk", () => {
+		const testBoard2 = Gameboard();
+		testBoard2.placeShip(3, 2, 2, "vertical");
+		testBoard2.receiveAttack(3, 2);
+		testBoard2.receiveAttack(3, 3);
+		expect(testBoard2.isAllSunk()).toBe(true);
 	});
 });
