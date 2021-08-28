@@ -24,16 +24,14 @@ function Gameboard() {
 				if (board[y][x + i] != null) return;
 			}
 			for (let i = 0; i < shipLength; i++) {
-				board[y][x] = { ship: ship, partIndex: i };
-				x++;
+				board[y][x + i] = { ship: ship, partIndex: i };
 			}
 		} else if (orientation == "vertical" && y + shipLength <= 10) {
 			for (let i = 0; i < shipLength; i++) {
 				if (board[y + i][x] != null) return;
 			}
 			for (let i = 0; i < shipLength; i++) {
-				board[y][x] = { ship: ship, partIndex: i };
-				y++;
+				board[y + i][x] = { ship: ship, partIndex: i };
 			}
 		}
 	}
