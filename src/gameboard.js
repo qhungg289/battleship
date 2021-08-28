@@ -2,7 +2,6 @@ import Ship from "./ship";
 
 function Gameboard() {
 	let board = [];
-	let isAllSunk = false;
 	let missedShot = [];
 
 	// Set width and height of the board then populate it with null values
@@ -40,14 +39,26 @@ function Gameboard() {
 	}
 
 	function receiveAttack(x, y) {
-		if (board[y][x] == null) {
-			missedShot.push({ x: x, y: y });
+		if (board[y][x] != null) {
+			board[y][x].ship.hit(board[y][x].partIndex);
 		} else {
-			board[y][x].ship.hit(board[y][x].partIndex); // Write test for this
+			missedShot.push({ x: x, y: y });
 		}
 	}
 
-	return { board, missedShot, isAllSunk, placeShip, receiveAttack };
+	function isAllSunk() {
+		let filteredBoard = [];
+		board.forEach((row) => {
+			row.forEach((cell) => {
+				if (cell != null) {
+					filteredBoard.push(cell);
+				}
+			});
+		});
+		return filteredBoard.every((cell) => cell.ship.isSunk());
+	}
+
+	return { board, missedShot, placeShip, receiveAttack, isAllSunk };
 }
 
 export default Gameboard;
