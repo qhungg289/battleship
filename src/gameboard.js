@@ -4,7 +4,6 @@ function Gameboard() {
 	let board = [];
 	let missedShot = [];
 
-	// Set width and height of the board then populate it with null values
 	// // Height
 	for (let i = 0; i < 10; i++) {
 		board.push([]);
@@ -45,15 +44,15 @@ function Gameboard() {
 	}
 
 	function isAllSunk() {
-		let filteredBoard = [];
+		let occupiedCells = [];
 		board.forEach((row) => {
 			row.forEach((cell) => {
 				if (cell != null) {
-					filteredBoard.push(cell);
+					occupiedCells.push(cell);
 				}
 			});
 		});
-		return filteredBoard.every((cell) => cell.ship.isSunk());
+		return occupiedCells.every((cell) => cell.ship.isSunk());
 	}
 
 	return { board, missedShot, placeShip, receiveAttack, isAllSunk };
