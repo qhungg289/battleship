@@ -15,22 +15,16 @@ const bot = Gameboard();
 test("able to make a random attack to player board", () => {
 	autoAttack(player);
 
-	let occupiedCells = [];
-	player.board.forEach((row) => {
-		row.forEach((cell) => {
-			if (cell != null) {
-				occupiedCells.push(cell);
-			}
-		});
-	});
-
 	let isShipGetHit = false;
-	for (let i = 0; i < occupiedCells.length; i++) {
-		if (occupiedCells[i].ship.shipParts.includes(true)) {
-			isShipGetHit = true;
-			break;
+
+	for (let i = 0; i < player.board.length; i++) {
+		for (let j = 0; j < player.board[i].length; j++) {
+			if (player.board[i][j].hit) {
+				isShipGetHit = true;
+				break;
+			}
 		}
 	}
 
-	expect(player.missedShot.length > 0 || isShipGetHit).toBeTruthy();
+	expect(isShipGetHit).toBeTruthy();
 });
