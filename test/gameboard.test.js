@@ -19,9 +19,9 @@ describe("check ship at specific coordinates", () => {
 		expect(testBoard.board[3][3]).not.toBeNull();
 		expect(testBoard.board[3][4]).not.toBeNull();
 
-		expect(testBoard.board[3][2].partIndex).toEqual(0);
-		expect(testBoard.board[3][3].partIndex).toEqual(1);
-		expect(testBoard.board[3][4].partIndex).toEqual(2);
+		expect(testBoard.board[3][2].part).toEqual(0);
+		expect(testBoard.board[3][3].part).toEqual(1);
+		expect(testBoard.board[3][4].part).toEqual(2);
 
 		expect(testBoard.board[3][2].ship.shipParts).toEqual([false, false, false]);
 		expect(testBoard.board[3][3].ship.shipParts).toEqual([false, false, false]);
@@ -35,10 +35,10 @@ describe("check ship at specific coordinates", () => {
 		expect(testBoard.board[7][6]).not.toBeNull();
 		expect(testBoard.board[8][6]).not.toBeNull();
 
-		expect(testBoard.board[5][6].partIndex).toEqual(0);
-		expect(testBoard.board[6][6].partIndex).toEqual(1);
-		expect(testBoard.board[7][6].partIndex).toEqual(2);
-		expect(testBoard.board[8][6].partIndex).toEqual(3);
+		expect(testBoard.board[5][6].part).toEqual(0);
+		expect(testBoard.board[6][6].part).toEqual(1);
+		expect(testBoard.board[7][6].part).toEqual(2);
+		expect(testBoard.board[8][6].part).toEqual(3);
 
 		expect(testBoard.board[5][6].ship.shipParts).toEqual([
 			false,
@@ -141,6 +141,10 @@ describe("check ship at specific coordinates", () => {
 			true,
 			false,
 		]);
+		expect(testBoard.board[5][6].hit).toBeFalsy();
+		expect(testBoard.board[6][6].hit).toBeFalsy();
+		expect(testBoard.board[7][6].hit).toBeTruthy();
+		expect(testBoard.board[8][6].hit).toBeFalsy();
 	});
 
 	test("is all ships sunk", () => {
