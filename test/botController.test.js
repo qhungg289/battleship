@@ -1,4 +1,4 @@
-import { autoAttack, autoPlaceShip } from "../src/botController";
+import { autoAttack, autoPlaceShips } from "../src/botController";
 import Gameboard from "../src/gameboard";
 
 const player = Gameboard();
@@ -14,9 +14,7 @@ const bot = Gameboard();
 
 test("able to make a random attack to player board", () => {
 	autoAttack(player);
-
 	let isShipGetHit = false;
-
 	for (let i = 0; i < player.board.length; i++) {
 		for (let j = 0; j < player.board[i].length; j++) {
 			if (player.board[i][j].hit) {
@@ -27,4 +25,18 @@ test("able to make a random attack to player board", () => {
 	}
 
 	expect(isShipGetHit).toBeTruthy();
+});
+
+test("able to randomly place 7 ship at valid locations", () => {
+	autoPlaceShips(bot);
+	let shipCount = 0;
+	for (let i = 0; i < bot.board.length; i++) {
+		for (let j = 0; j < bot.board[i].length; j++) {
+			if ("ship" in bot.board[i][j] && "part" in bot.board[i][j]) {
+				shipCount++;
+			}
+		}
+	}
+
+	expect(shipCount).toBe(18);
 });
