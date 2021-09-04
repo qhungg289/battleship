@@ -1,4 +1,4 @@
-import Gameboard from "../src/gameboard";
+import Gameboard from "../src/Gameboard";
 
 const testBoard = new Gameboard();
 

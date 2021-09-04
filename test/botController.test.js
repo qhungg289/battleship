@@ -1,5 +1,5 @@
-import botController from "../src/botController";
-import Gameboard from "../src/gameboard";
+import BotController from "../src/BotController";
+import Gameboard from "../src/Gameboard";
 
 const player = new Gameboard();
 player.placeShip(8, 0, 1, "vertical");
@@ -10,7 +10,7 @@ player.placeShip(5, 6, 4, "vertical");
 player.placeShip(1, 8, 2, "horizontal");
 player.placeShip(9, 9, 1, "vertical");
 
-const bot = new botController();
+const bot = new BotController();
 
 test("able to make a random attack to player board", () => {
 	bot.autoAttack(player);

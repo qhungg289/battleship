@@ -1,4 +1,4 @@
-import Ship from "../src/ship";
+import Ship from "../src/Ship";
 
 describe("check ship status", () => {
 	const testShip = new Ship(3);
