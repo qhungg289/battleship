@@ -1,7 +1,7 @@
 import Ship from "../src/ship";
 
 describe("check ship status", () => {
-	const testShip = Ship(3);
+	const testShip = new Ship(3);
 
 	test("is the ship get hit", () => {
 		testShip.hit(2);

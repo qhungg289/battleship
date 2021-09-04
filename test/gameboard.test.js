@@ -1,6 +1,6 @@
 import Gameboard from "../src/gameboard";
 
-const testBoard = Gameboard();
+const testBoard = new Gameboard();
 
 describe("size of board is 10x10", () => {
 	test("board height is 10", () => {
@@ -110,7 +110,7 @@ describe("check ship at specific coordinates", () => {
 	});
 
 	test("is all ships sunk", () => {
-		const testBoard2 = Gameboard();
+		const testBoard2 = new Gameboard();
 		testBoard2.placeShip(3, 2, 2, "vertical");
 		testBoard2.receiveAttack(3, 2);
 		testBoard2.receiveAttack(3, 3);
