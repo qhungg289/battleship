@@ -1,5 +1,3 @@
-import { autoAttack } from "./botController";
-
 function initGame(player, bot) {
 	const domGameboard1 = document.getElementById("gameboard-1");
 	const domGameboard2 = document.getElementById("gameboard-2");
@@ -62,7 +60,7 @@ function initGame(player, bot) {
 
 			cell.addEventListener("click", () => {
 				bot.receiveAttack(j, i);
-				autoAttack(player);
+				bot.autoAttack(player);
 				initGame(player, bot);
 			});
 
