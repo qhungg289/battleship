@@ -1,49 +1,49 @@
-import Ship from "./ship";
+import Ship from "./Ship";
 
-function Gameboard() {
-	let board = [];
+export default class Gameboard {
+	constructor() {
+		this.board = [];
+		for (let i = 0; i < 10; i++) {
+			this.board.push([]);
+		}
 
-	for (let i = 0; i < 10; i++) {
-		board.push([]);
-	}
-
-	for (let i = 0; i < board.length; i++) {
-		for (let j = 0; j < 10; j++) {
-			board[i].push({ hit: false });
+		for (let i = 0; i < this.board.length; i++) {
+			for (let j = 0; j < 10; j++) {
+				this.board[i].push({ hit: false });
+			}
 		}
 	}
-
-	function placeShip(x, y, shipLength, orientation) {
-		const ship = Ship(shipLength);
+	placeShip(x, y, shipLength, orientation) {
+		const ship = new Ship(shipLength);
 		if (orientation == "horizontal" && x + shipLength <= 10) {
 			for (let i = 0; i < shipLength; i++) {
-				if ("ship" in board[y][x + i] && "part" in board[y][x + i]) return;
+				if ("ship" in this.board[y][x + i] && "part" in this.board[y][x + i])
+					return;
 			}
 			for (let i = 0; i < shipLength; i++) {
-				board[y][x + i] = { ship: ship, part: i, hit: false };
+				this.board[y][x + i] = { ship: ship, part: i, hit: false };
 			}
 		} else if (orientation == "vertical" && y + shipLength <= 10) {
 			for (let i = 0; i < shipLength; i++) {
-				if ("ship" in board[y + i][x] && "part" in board[y + i][x]) return;
+				if ("ship" in this.board[y + i][x] && "part" in this.board[y + i][x])
+					return;
 			}
 			for (let i = 0; i < shipLength; i++) {
-				board[y + i][x] = { ship: ship, part: i, hit: false };
+				this.board[y + i][x] = { ship: ship, part: i, hit: false };
 			}
 		}
 	}
-
-	function receiveAttack(x, y) {
-		if ("ship" in board[y][x] && "part" in board[y][x]) {
-			board[y][x].ship.hit(board[y][x].part);
-			board[y][x].hit = true;
+	receiveAttack(x, y) {
+		if ("ship" in this.board[y][x] && "part" in this.board[y][x]) {
+			this.board[y][x].ship.hit(this.board[y][x].part);
+			this.board[y][x].hit = true;
 		} else {
-			board[y][x].hit = true;
+			this.board[y][x].hit = true;
 		}
 	}
-
-	function isAllSunk() {
+	isAllSunk() {
 		let occupiedCells = [];
-		board.forEach((row) => {
+		this.board.forEach((row) => {
 			row.forEach((cell) => {
 				if ("ship" in cell && "part" in cell) {
 					occupiedCells.push(cell);
@@ -52,8 +52,4 @@ function Gameboard() {
 		});
 		return occupiedCells.every((cell) => cell.ship.isSunk());
 	}
-
-	return { board, placeShip, receiveAttack, isAllSunk };
 }
-
-export default Gameboard;
