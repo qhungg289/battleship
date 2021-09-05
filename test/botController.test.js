@@ -29,14 +29,14 @@ test("able to make a random attack to player board", () => {
 
 test("able to randomly place 7 ship at valid locations", () => {
 	bot.autoPlaceShips();
-	let shipCount = 0;
+	let shipCount = [];
 	for (let i = 0; i < bot.board.length; i++) {
 		for (let j = 0; j < bot.board[i].length; j++) {
 			if ("ship" in bot.board[i][j] && "part" in bot.board[i][j]) {
-				shipCount++;
+				shipCount.push(bot.board[i][j]);
 			}
 		}
 	}
 
-	expect(shipCount).toBe(18);
+	expect(shipCount.length).toBe(18);
 });
