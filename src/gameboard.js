@@ -13,6 +13,7 @@ export default class Gameboard {
 			}
 		}
 	}
+
 	placeShip(x, y, shipLength, orientation) {
 		const ship = new Ship(shipLength);
 		if (orientation == "horizontal" && x + shipLength <= 10) {
@@ -33,6 +34,7 @@ export default class Gameboard {
 			}
 		}
 	}
+
 	receiveAttack(x, y) {
 		if ("ship" in this.board[y][x] && "part" in this.board[y][x]) {
 			this.board[y][x].ship.hit(this.board[y][x].part);
@@ -41,6 +43,7 @@ export default class Gameboard {
 			this.board[y][x].hit = true;
 		}
 	}
+
 	isAllSunk() {
 		let occupiedCells = [];
 		this.board.forEach((row) => {
