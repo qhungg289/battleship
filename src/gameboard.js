@@ -18,17 +18,9 @@ export default class Gameboard {
 		const ship = new Ship(shipLength);
 		if (orientation == "horizontal" && x + shipLength <= 10) {
 			for (let i = 0; i < shipLength; i++) {
-				if ("ship" in this.board[y][x + i] && "part" in this.board[y][x + i])
-					return;
-			}
-			for (let i = 0; i < shipLength; i++) {
 				this.board[y][x + i] = { ship: ship, part: i, hit: false };
 			}
 		} else if (orientation == "vertical" && y + shipLength <= 10) {
-			for (let i = 0; i < shipLength; i++) {
-				if ("ship" in this.board[y + i][x] && "part" in this.board[y + i][x])
-					return;
-			}
 			for (let i = 0; i < shipLength; i++) {
 				this.board[y + i][x] = { ship: ship, part: i, hit: false };
 			}
