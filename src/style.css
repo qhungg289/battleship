@@ -1,3 +1,13 @@
+:root {
+	--playground-bg: #7e8ec9;
+	--board-bg: #ffffff;
+	--btn-bg-1: #4a9bfa;
+	--btn-bg-2: #ffa565;
+	--ship-bg: #626367;
+	--ship-hit-bg: #ff6c6c;
+	--empty-hit-bg: #68ff92;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -7,20 +17,21 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
+	position: relative;
+	overflow: hidden;
 }
 
 #play-area {
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-around;
 	align-items: center;
-	height: 80%;
+	height: 70%;
+	background-color: var(--playground-bg);
+	border-radius: 8px;
 }
 
-#control-area {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 20%;
+.maximized {
+	height: 80% !important;
 }
 
 #gameboard-1,
@@ -32,7 +43,6 @@ body {
 	grid-template-rows: repeat(10, 1fr);
 	grid-column-gap: 0px;
 	grid-row-gap: 0px;
-	transition: 0.3s;
 }
 
 .win {
@@ -44,33 +54,106 @@ body {
 	transform: scale(0.9);
 }
 
-.grid-cell-1,
-.grid-cell-2 {
+.grid-cell,
+.grid-cell-enemy,
+.grid-cell-player {
 	height: 2rem;
 	width: 2rem;
 	padding: 0;
 	margin: 0.1rem;
 	display: inline;
 	border: none;
-	border-radius: 6px;
+	border-radius: 4px;
+	background-color: var(--board-bg);
 }
 
-.grid-cell-2:hover {
-	border: 3px solid rgba(75, 75, 75, 0.514);
-}
-
-.grid-cell-2 {
+.grid-cell-enemy,
+.grid-cell-player {
 	cursor: pointer;
 }
 
+.grid-cell-enemy:hover,
+.grid-cell-player:hover {
+	border: 3px solid var(--playground-bg);
+}
+
 .ship {
-	background: #464646;
+	background: var(--ship-bg);
 }
 
 .ship-hit {
-	background: #ff4747;
+	background: var(--ship-hit-bg);
 }
 
 .empty-hit {
-	background: #6fde7e;
+	background: var(--empty-hit-bg);
+}
+
+#control-area {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	height: 30%;
+}
+
+.minimized {
+	height: 20% !important;
+}
+
+#container {
+	display: flex;
+	height: 100%;
+	width: 50%;
+	border-radius: 8px;
+	justify-content: space-around;
+	align-items: center;
+}
+
+#place-ship {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+#place-ship p {
+	font-family: sans-serif;
+	font-size: 1.25rem;
+	margin: 0;
+}
+
+#place-ship p:first-of-type {
+	font-weight: 600;
+}
+
+#btn {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	justify-content: space-evenly;
+}
+
+#reset-btn,
+#start-game-btn,
+#rotate-btn {
+	background-color: var(--btn-bg-1);
+	border: none;
+	border-radius: 6px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: white;
+	width: 6rem;
+	height: 2.5rem;
+	cursor: pointer;
+	outline: none;
+}
+
+#rotate-btn {
+	background-color: var(--btn-bg-2);
+}
+
+#reset-btn:hover,
+#start-game-btn:hover,
+#rotate-btn:hover {
+	opacity: 0.85;
 }
