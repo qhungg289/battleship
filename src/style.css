@@ -1,11 +1,12 @@
 :root {
-	--playground-bg: #7e8ec9;
-	--board-bg: #ffffff;
+	--playground-bg: #ffffff;
+	--board-bg: #eaeaea;
 	--btn-bg-1: #4a9bfa;
-	--btn-bg-2: #ffa565;
+	--btn-bg-2: #ff8933;
 	--ship-bg: #626367;
-	--ship-hit-bg: #ff6c6c;
-	--empty-hit-bg: #68ff92;
+	--ship-hit-bg: #ff5151;
+	--empty-hit-bg: #00e075;
+	--cell-highlight: #4a9bfa;
 }
 
 * {
@@ -27,7 +28,7 @@ body {
 	align-items: center;
 	height: 70%;
 	background-color: var(--playground-bg);
-	border-radius: 8px;
+	border-radius: 0 0 8px 8px;
 }
 
 .maximized {
@@ -74,7 +75,7 @@ body {
 
 .grid-cell-enemy:hover,
 .grid-cell-player:hover {
-	border: 3px solid var(--playground-bg);
+	border: 3px solid var(--cell-highlight);
 }
 
 .ship {
@@ -103,7 +104,8 @@ body {
 #container {
 	display: flex;
 	height: 100%;
-	width: 50%;
+	width: 80%;
+	max-width: 600px;
 	border-radius: 8px;
 	justify-content: space-around;
 	align-items: center;
@@ -135,7 +137,8 @@ body {
 
 #reset-btn,
 #start-game-btn,
-#rotate-btn {
+#rotate-btn,
+#new-game-btn {
 	background-color: var(--btn-bg-1);
 	border: none;
 	border-radius: 6px;
@@ -154,6 +157,32 @@ body {
 
 #reset-btn:hover,
 #start-game-btn:hover,
-#rotate-btn:hover {
+#rotate-btn:hover,
+#new-game-btn:hover {
 	opacity: 0.85;
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+	background-color: #fefefe;
+	margin: 15% auto;
+	padding: 1rem;
+	width: 15%;
+	border-radius: 6px;
+	font-size: 1.25rem;
+	font-family: sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
