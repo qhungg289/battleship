@@ -8,6 +8,10 @@ const rotateBtn = document.getElementById("rotate-btn");
 const placeShip = document.getElementById("place-ship");
 const orientationIndicator = document.getElementById("orientation-indicator");
 const shipIndicator = document.getElementById("ship");
+const endGameModal = document.getElementById("end-game");
+const endGameMessage = document.getElementById("end-game-message");
+const newGameBtn = document.getElementById("new-game-btn");
+
 let index = 0;
 
 rotateBtn.addEventListener("click", () => {
@@ -29,6 +33,16 @@ resetBtn.addEventListener("click", () => {
 	controlArea.classList.remove("minimized");
 });
 
+newGameBtn.addEventListener("click", () => {
+	index = 0;
+	placeShip.style.display = "flex";
+	startBtn.style.display = "block";
+	rotateBtn.style.display = "block";
+	playArea.classList.remove("maximized");
+	controlArea.classList.remove("minimized");
+	endGameModal.style.display = "none";
+});
+
 function initGame(player, bot) {
 	gameBoard1.innerHTML = "";
 	gameBoard1.classList.remove("win");
@@ -45,12 +59,10 @@ function initGame(player, bot) {
 		cell.classList = "grid-cell ship";
 		shipIndicator.appendChild(cell);
 	}
-
 	if (index >= shipUnits.length) {
 		placeShip.style.display = "none";
 		rotateBtn.style.display = "none";
 	}
-
 	for (let i = 0; i < player.board.length; i++) {
 		for (let j = 0; j < player.board[i].length; j++) {
 			const cell = document.createElement("button");
@@ -82,7 +94,6 @@ function initGame(player, bot) {
 							shipUnits[index],
 							orientationIndicator.dataset.orientation
 						);
-						console.log(index);
 						index++;
 						initGame(player, bot);
 					}
@@ -105,7 +116,6 @@ function initGame(player, bot) {
 							shipUnits[index],
 							orientationIndicator.dataset.orientation
 						);
-						console.log(index);
 						index++;
 						initGame(player, bot);
 					}
@@ -127,9 +137,13 @@ function renderBoards(player, bot) {
 	if (player.isAllSunk()) {
 		gameBoard2.classList.add("win");
 		gameBoard1.classList.add("lose");
+		endGameMessage.innerHTML = "Computer win!";
+		endGameModal.style.display = "block";
 	} else if (bot.isAllSunk()) {
 		gameBoard1.classList.add("win");
 		gameBoard2.classList.add("lose");
+		endGameMessage.innerHTML = "Player win!";
+		endGameModal.style.display = "block";
 	}
 	for (let i = 0; i < player.board.length; i++) {
 		for (let j = 0; j < player.board[i].length; j++) {
@@ -178,4 +192,4 @@ function renderBoards(player, bot) {
 	}
 }
 
-export { initGame, renderBoards, resetBtn, startBtn };
+export { initGame, renderBoards, resetBtn, startBtn, newGameBtn };
