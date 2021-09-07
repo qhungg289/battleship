@@ -16,7 +16,26 @@
 			<div id="gameboard-2"></div>
 		</div>
 		<div id="control-area">
-			<button id="reset-btn">Reset</button>
+			<div id="container">
+				<div id="place-ship">
+					<p>Your ship</p>
+					<div id="ship"></div>
+					<p id="orientation-indicator" data-orientation="horizontal">
+						Horizontal
+					</p>
+				</div>
+				<div id="btn">
+					<button id="start-game-btn">Start</button>
+					<button id="reset-btn">Reset</button>
+					<button id="rotate-btn">Rotate</button>
+				</div>
+			</div>
+		</div>
+		<div id="end-game" class="modal">
+			<div class="modal-content">
+				<p id="end-game-message"></p>
+				<button id="new-game-btn">New Game</button>
+			</div>
 		</div>
 		<script src="main.js"></script>
 	</body>
