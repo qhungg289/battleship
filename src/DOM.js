@@ -138,12 +138,12 @@ function renderBoards(player, bot) {
 		gameBoard2.classList.add("win");
 		gameBoard1.classList.add("lose");
 		endGameMessage.innerHTML = "Computer win!";
-		endGameModal.style.display = "block";
+		endGameModal.style.display = "flex";
 	} else if (bot.isAllSunk()) {
 		gameBoard1.classList.add("win");
 		gameBoard2.classList.add("lose");
 		endGameMessage.innerHTML = "Player win!";
-		endGameModal.style.display = "block";
+		endGameModal.style.display = "flex";
 	}
 	for (let i = 0; i < player.board.length; i++) {
 		for (let j = 0; j < player.board[i].length; j++) {

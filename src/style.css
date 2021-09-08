@@ -164,6 +164,9 @@ body {
 
 .modal {
 	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	position: fixed;
 	z-index: 1;
 	left: 0;
@@ -176,9 +179,9 @@ body {
 
 .modal-content {
 	background-color: #fefefe;
-	margin: 15% auto;
+	/* margin: 15% auto; */
 	padding: 1rem;
-	width: 15%;
+	width: 20%;
 	border-radius: 6px;
 	font-size: 1.25rem;
 	font-family: sans-serif;
@@ -197,5 +200,9 @@ body {
 	#gameboard-1,
 	#gameboard-2 {
 		margin: 2rem auto;
+	}
+
+	.modal-content {
+		width: 50%;
 	}
 }
